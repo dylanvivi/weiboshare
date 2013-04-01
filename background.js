@@ -3,6 +3,17 @@
 // found in the LICENSE file.
 
 // Called when the user clicks on the browser action.
+var flag = true;
+
 chrome.browserAction.onClicked.addListener(function(tab) {
-  chrome.tabs.executeScript(null, {file: "content_script.js"});
+	if(flag){
+		chrome.browserAction.setIcon({path: "icon2.png"});
+		chrome.tabs.executeScript(null, {file: "content_script.js"});
+		flag = false;
+	}else{
+		chrome.browserAction.setIcon({path: "icon.png"});
+		flag = true;
+
+	}
+	
 });

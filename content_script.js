@@ -1,12 +1,16 @@
-var selection = window.getSelection ();      //get the selection object     
-var focusNodeProp = selection.focusNode;     //get the node containing the end of selection 
-alert ( "选中文字： \n" + focusNodeProp.parentNode.innerText + "\n微博mid: <" + focusNodeProp.parentNode.parentNode.parentNode.parentNode.getAttribute("mid") +">");  
+/*
+	var selection = window.getSelection ();      //get the selection object     
+	var focusNodeProp = selection.focusNode;     //get the node containing the end of selection 
+	var mid = focusNodeProp.parentNode.parentNode.parentNode.parentNode.getAttribute("mid"); //get selected mid
+*/
 
-
-var img = document.createElement('img'); 
+var tooltip = document.createElement("div");
+var img = document.createElement("img");
 var url = chrome.extension.getURL("share.gif");
 img.src = url;
-img.style.display="none";
+document.body.appendChild(tooltip);
+tooltip.id = "tooltip";
+tooltip.appendChild(img);  
 
 //选中分享
 var $sinaMiniBlogShare = function(eleShare, eleContainer) {
@@ -29,6 +33,7 @@ var $sinaMiniBlogShare = function(eleShare, eleContainer) {
 			eleShare.style.display = "inline";
 			eleShare.style.left = left + "px";
 			eleShare.style.top = top + "px";
+			eleShare.style.position = "absolute";
 		} else {
 			eleShare.style.display = "none";
 		}
@@ -36,9 +41,9 @@ var $sinaMiniBlogShare = function(eleShare, eleContainer) {
 	eleShare.onclick = function() {
 		var txt = funGetSelectTxt(), title = (eleTitle && eleTitle.innerHTML)? eleTitle.innerHTML : "未命名页面";
 		if (txt) {
-			window.open('http://v.t.sina.com.cn/share/share.php?title=' + txt + '→来自页面"' + title + '"的文字片段&url=' + window.location.href);	
+			window.open('http://v.t.sina.com.cn/share/share.php?title=' + txt + '→来自页面"' + title + '"的文字片段&url=' + window.location.href+" mid:"+mid);	
 		}
 	};
 };
 
-$sinaMiniBlogShare(img);
+$sinaMiniBlogShare(tooltip);
