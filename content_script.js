@@ -41,7 +41,7 @@ var $sinaMiniBlogShare = function(eleShare, eleContainer) {
 	eleShare.onclick = function() {
 		var txt = funGetSelectTxt(), title = (eleTitle && eleTitle.innerHTML)? eleTitle.innerHTML : "未命名页面";
 		if (txt) {
-			window.open('http://v.t.sina.com.cn/share/share.php?title=' + txt + '→来自页面"' + title + '"的文字片段&url=' + window.location.href+" mid:"+mid);	
+			window.open('http://v.t.sina.com.cn/share/share.php?title=' + txt + '→来自页面"' + title + '"的文字片段&url=' + window.location.href);	
 		}
 	};
 };
